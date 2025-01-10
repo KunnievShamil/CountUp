@@ -63,4 +63,10 @@ dependencies {
     implementation(libs.androidx.material3)
     debugImplementation(libs.androidx.ui.tooling)
     implementation(libs.kotlin.serialization)
+
+    //Navigation
+    implementation(libs.voyager.navigator)
+    implementation(libs.voyager.bottomSheetNavigator)
+    implementation(libs.voyager.screenModel)
+    implementation(libs.voyager.transitions)
 }
