@@ -22,7 +22,7 @@ fun AppContent() {
                     .windowInsetsPadding(WindowInsets.systemBars)
             ) {
                 Navigator(
-                    screen = RootScreen,
+                    screen = RootScreen(),
                     key = "AppContentNavigator"
                 )
             }

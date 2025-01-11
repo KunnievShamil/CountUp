@@ -69,4 +69,9 @@ dependencies {
     implementation(libs.voyager.bottomSheetNavigator)
     implementation(libs.voyager.screenModel)
     implementation(libs.voyager.transitions)
+
+    // Koin
+    implementation(libs.koin.android)
+    implementation(libs.koin.androidx.viewmodel)
+    implementation(libs.koin.androidx.compose)
 }
