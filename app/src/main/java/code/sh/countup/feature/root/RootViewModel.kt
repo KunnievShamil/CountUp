@@ -44,7 +44,6 @@ class RootViewModel(
                     age = state.value.age
                 )
             )
-            getList()
         }
     }
 
@@ -57,10 +56,12 @@ class RootViewModel(
     private fun getList() {
         viewModelScope.launch {
             val list = rootRepository.getAllRoots()
-            mutableState.update { uiState ->
-                uiState.copy(
-                    list = list
-                )
+            list.collect { roots ->
+                mutableState.update { uiState ->
+                    uiState.copy(
+                        list = roots
+                    )
+                }
             }
         }
     }
