@@ -1,4 +1,4 @@
-package code.sh.countup.core.base
+package code.sh.countup.core.ui.base
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.channels.Channel

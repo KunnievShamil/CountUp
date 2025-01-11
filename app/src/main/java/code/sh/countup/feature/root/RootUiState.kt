@@ -1,11 +1,17 @@
 package code.sh.countup.feature.root
 
+import code.sh.countup.core.database.entity.RootEntity
+
 data class RootUiState(
-    val title: String
+    val name: String,
+    val age: String,
+    val list: List<RootEntity>
 ) {
     companion object {
         fun init() = RootUiState(
-            title = "Hello Android!"
+            name = "",
+            age = "",
+            list = emptyList()
         )
     }
 }

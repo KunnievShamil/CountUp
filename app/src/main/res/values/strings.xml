@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">CountUp</string>
+
+    <!--    Root screen-->
+    <string name="root_screen_insert_button_title">Добавить данные</string>
+    <string name="root_screen_root_item">Name: %1$s, Age: %2$s</string>
+
 </resources>

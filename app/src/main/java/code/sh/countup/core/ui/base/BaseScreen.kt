@@ -1,4 +1,4 @@
-package code.sh.countup.core.base
+package code.sh.countup.core.ui.base
 
 import cafe.adriel.voyager.core.screen.Screen
 import cafe.adriel.voyager.core.screen.ScreenKey
