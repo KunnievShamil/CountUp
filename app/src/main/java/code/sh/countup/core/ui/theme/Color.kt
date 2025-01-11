@@ -1,4 +1,4 @@
-package code.sh.countup.ui.theme
+package code.sh.countup.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
