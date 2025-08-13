@@ -18,4 +18,6 @@ val databaseModule = module {
     }
 
     single { get<AppDatabase>().rootDao() }
+    single { get<AppDatabase>().counterDao() }
+    single { get<AppDatabase>().counterRecordsDao() }
 }
