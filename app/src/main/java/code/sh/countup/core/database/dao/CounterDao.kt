@@ -13,5 +13,5 @@ interface CounterDao {
     fun insert(counterEntity: CounterEntity)
 
     @Query("SELECT * FROM CounterEntity")
-    fun getAllCounters(): Flow<CounterEntity>
+    fun getAllCounters(): Flow<List<CounterEntity>>
 }

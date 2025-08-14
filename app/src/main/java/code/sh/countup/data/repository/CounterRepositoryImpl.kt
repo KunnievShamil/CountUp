@@ -13,7 +13,7 @@ class CounterRepositoryImpl(
         counterDao.insert(counterEntity = counter)
     }
 
-    override fun getCounters(): Flow<CounterEntity> {
+    override fun getCounters(): Flow<List<CounterEntity>> {
         return counterDao.getAllCounters()
     }
 }

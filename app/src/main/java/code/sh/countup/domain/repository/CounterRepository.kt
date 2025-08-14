@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CounterRepository {
     suspend fun createCounter(counter: CounterEntity)
-    fun getCounters(): Flow<CounterEntity>
+    fun getCounters(): Flow<List<CounterEntity>>
 }

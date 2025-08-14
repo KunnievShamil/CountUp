@@ -15,6 +15,7 @@ import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import code.sh.countup.core.ui.theme.CountUpTheme
 import code.sh.countup.feature.counter_creating.CounterCreatingScreen
+import code.sh.countup.feature.counter_list.CounterListScreen
 
 private const val NAVIGATOR_KEY = "AppContentNavigator"
 
@@ -38,7 +39,7 @@ private fun AppContent() {
                     .windowInsetsPadding(WindowInsets.systemBars)
             ) {
                 Navigator(
-                    screen = CounterCreatingScreen(),
+                    screen = CounterListScreen(),
                     key = NAVIGATOR_KEY
                 )
             }
