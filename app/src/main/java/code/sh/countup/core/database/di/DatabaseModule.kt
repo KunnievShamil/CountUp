@@ -14,10 +14,11 @@ val databaseModule = module {
             context = get<Application>(),
             klass = AppDatabase::class.java,
             name = DATABASE_NAME
-        ).build()
+        )
+            .fallbackToDestructiveMigration()
+            .build()
     }
 
-    single { get<AppDatabase>().rootDao() }
     single { get<AppDatabase>().counterDao() }
     single { get<AppDatabase>().counterRecordsDao() }
 }

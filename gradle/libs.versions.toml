@@ -11,6 +11,7 @@ composeBom = "2024.12.01"
 room = "2.6.1"
 voyager = "1.1.0-beta03"
 kotlinKsp = "2.1.0-1.0.29"
+navigationCompose = "2.8.7" # <— отдельная версия для Navigation
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -25,10 +26,8 @@ androidx-material3 = { group = "androidx.compose.material3", name = "material3" 
 kotlin-serialization = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version = "1.8.0" }
 
 # Navigation
-voyager-navigator = { module = "cafe.adriel.voyager:voyager-navigator", version.ref = "voyager" }
-voyager-bottomSheetNavigator = { module = "cafe.adriel.voyager:voyager-bottom-sheet-navigator", version.ref = "voyager" }
-voyager-screenModel = { module = "cafe.adriel.voyager:voyager-screenmodel", version.ref = "voyager" }
-voyager-transitions = { module = "cafe.adriel.voyager:voyager-transitions", version.ref = "voyager" }
+navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
+viewModel-compose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 
 # Koin
 koin-android = { module = "io.insert-koin:koin-android", version.ref = "koinAndroid" }

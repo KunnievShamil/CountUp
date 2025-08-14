@@ -16,40 +16,34 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import code.sh.countup.R
-import code.sh.countup.core.ui.base.BaseScreen
 import org.koin.compose.viewmodel.koinViewModel
 
-class CounterCreatingScreen : BaseScreen() {
-    @Composable
-    override fun Content() {
+@Composable
+fun CounterCreatingScreen(
+    onCreateCounter: (counterId: Int) -> Unit
+) {
+    val viewModel: CounterCreatingViewModel = koinViewModel()
+    val uiState by viewModel.state.collectAsState()
 
-        val navigator = LocalNavigator.currentOrThrow
-
-        val viewModel: CounterCreatingViewModel = koinViewModel()
-        val uiState by viewModel.state.collectAsState()
-
-        LaunchedEffect(Unit) {
-            viewModel.event.collect { event ->
-                when (event) {
-                    is CounterCreatingUiEvent.NavigateTo -> {
-                        navigator.replace(item = event.screen)
-                    }
+    LaunchedEffect(Unit) {
+        viewModel.event.collect { event ->
+            when (event) {
+                is CounterCreatingUiEvent.OnCreateCounter -> {
+                    onCreateCounter(event.counterId)
                 }
             }
         }
-
-        CounterCreating(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            nameValue = uiState.name,
-            onCreateClick = viewModel::onCreateClick,
-            onNameChange = viewModel::onNameChange
-        )
     }
+
+    CounterCreating(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        nameValue = uiState.name,
+        onCreateClick = viewModel::onCreateClick,
+        onNameChange = viewModel::onNameChange
+    )
 }
 
 @Composable
@@ -79,7 +73,6 @@ private fun CounterCreating(
     }
 }
 
-
 @Preview(showBackground = true)
 @Composable
 private fun CounterCreatingPreview() {
@@ -88,11 +81,7 @@ private fun CounterCreatingPreview() {
             .fillMaxSize()
             .padding(16.dp),
         nameValue = "Подтягивания",
-        onCreateClick = {
-
-        },
-        onNameChange = {
-
-        }
+        onCreateClick = {},
+        onNameChange = {}
     )
 }

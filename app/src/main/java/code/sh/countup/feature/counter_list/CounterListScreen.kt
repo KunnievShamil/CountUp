@@ -15,7 +15,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -23,38 +22,24 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
 import code.sh.countup.R
 import code.sh.countup.core.database.entity.CounterEntity
-import code.sh.countup.core.ui.base.BaseScreen
 import org.koin.compose.viewmodel.koinViewModel
 
-class CounterListScreen : BaseScreen() {
+@Composable
+fun CounterListScreen(
+    onClickCounter: (Int) -> Unit,
+    onClickCreateCounter: () -> Unit
+) {
+    val viewModel: CounterListViewModel = koinViewModel()
+    val uiState by viewModel.state.collectAsState()
 
-    @Composable
-    override fun Content() {
-
-        val navigator = LocalNavigator.currentOrThrow
-
-        val viewModel: CounterListViewModel = koinViewModel()
-        val uiState by viewModel.state.collectAsState()
-
-        LaunchedEffect(Unit) {
-            viewModel.event.collect { event ->
-                when (event) {
-                    is CounterListUiEvent.NavigateTo -> navigator.push(event.screen)
-                }
-            }
-        }
-
-        CounterList(
-            modifier = Modifier.fillMaxSize(),
-            counters = uiState.counters,
-            onCounterClick = viewModel::onClickCounter,
-            onCreateCounterClick = viewModel::onClickCreateCounter
-        )
-    }
+    CounterList(
+        modifier = Modifier.fillMaxSize(),
+        counters = uiState.counters,
+        onCounterClick = onClickCounter,
+        onCreateCounterClick = onClickCreateCounter
+    )
 }
 
 @Composable

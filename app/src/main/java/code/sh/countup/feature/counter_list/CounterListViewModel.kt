@@ -3,8 +3,6 @@ package code.sh.countup.feature.counter_list
 import androidx.lifecycle.viewModelScope
 import code.sh.countup.core.ui.base.BaseViewModel
 import code.sh.countup.domain.repository.CounterRepository
-import code.sh.countup.feature.counter.CounterScreen
-import code.sh.countup.feature.counter_creating.CounterCreatingScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -27,26 +25,6 @@ class CounterListViewModel(
                     )
                 }
             }
-        }
-    }
-
-    fun onClickCounter(id: Int) {
-        viewModelScope.launch(Dispatchers.Default) {
-            mutableEvent.send(
-                CounterListUiEvent.NavigateTo(
-                    screen = CounterScreen(counterId = id)
-                )
-            )
-        }
-    }
-
-    fun onClickCreateCounter() {
-        viewModelScope.launch(Dispatchers.Default) {
-            mutableEvent.send(
-                CounterListUiEvent.NavigateTo(
-                    screen = CounterCreatingScreen()
-                )
-            )
         }
     }
 }

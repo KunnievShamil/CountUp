@@ -11,13 +11,16 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import cafe.adriel.voyager.navigator.Navigator
-import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navArgument
+import code.sh.countup.core.navigation.Routes
 import code.sh.countup.core.ui.theme.CountUpTheme
+import code.sh.countup.feature.counter.CounterScreen
 import code.sh.countup.feature.counter_creating.CounterCreatingScreen
 import code.sh.countup.feature.counter_list.CounterListScreen
-
-private const val NAVIGATOR_KEY = "AppContentNavigator"
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,16 +35,47 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun AppContent() {
     CountUpTheme {
-        BottomSheetNavigator {
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .windowInsetsPadding(WindowInsets.systemBars)
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(WindowInsets.systemBars)
+        ) {
+            val navigationController = rememberNavController()
+            NavHost(
+                navController = navigationController,
+                startDestination = Routes.COUNTER_LIST,
+                modifier = Modifier.fillMaxSize()
             ) {
-                Navigator(
-                    screen = CounterListScreen(),
-                    key = NAVIGATOR_KEY
-                )
+                composable(route = Routes.COUNTER_LIST) {
+                    CounterListScreen(
+                        onClickCounter = { id ->
+                            navigationController.navigate(Routes.counter(id))
+                        },
+                        onClickCreateCounter = {
+                            navigationController.navigate(Routes.CREATE_COUNTER)
+                        }
+                    )
+                }
+
+                composable(route = Routes.CREATE_COUNTER) {
+                    CounterCreatingScreen(
+                        onCreateCounter = { counterId ->
+                            navigationController.navigate(Routes.counter(id = counterId)) {
+                                popUpTo(Routes.CREATE_COUNTER) {
+                                    inclusive = true
+                                }
+                            }
+                        }
+                    )
+                }
+
+                composable(
+                    route = Routes.COUNTER,
+                    arguments = listOf(navArgument("id") { type = NavType.IntType })
+                ) { entry ->
+                    val id = entry.arguments!!.getInt("id")
+                    CounterScreen(counterId = id)
+                }
             }
         }
     }

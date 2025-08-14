@@ -13,34 +13,26 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import cafe.adriel.voyager.navigator.LocalNavigator
-import cafe.adriel.voyager.navigator.currentOrThrow
-import code.sh.countup.core.ui.base.BaseScreen
 import org.koin.compose.viewmodel.koinViewModel
 import org.koin.core.parameter.parametersOf
 
-class CounterScreen(private val counterId: Int) : BaseScreen() {
+@Composable
+fun CounterScreen(counterId: Int) {
 
-    @Composable
-    override fun Content() {
+    val viewModel: CounterViewModel = koinViewModel(
+        parameters = { parametersOf(counterId) }
+    )
 
-        val navigator = LocalNavigator.currentOrThrow
+    val uiState by viewModel.state.collectAsState()
 
-        val viewModel: CounterViewModel = koinViewModel(
-            parameters = { parametersOf(counterId) }
-        )
-        val uiState by viewModel.state.collectAsState()
-
-        Counter(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(32.dp),
-            count = uiState.count,
-            onCountClick = viewModel::onCountClick
-        )
-    }
+    Counter(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(32.dp),
+        count = uiState.count,
+        onCountClick = viewModel::onCountClick
+    )
 }
-
 
 @Composable
 private fun Counter(
@@ -49,8 +41,7 @@ private fun Counter(
     onCountClick: () -> Unit
 ) {
     Box(
-        modifier = modifier
-            .clickable { onCountClick.invoke() },
+        modifier = modifier.clickable { onCountClick.invoke() },
         contentAlignment = Alignment.Center
     ) {
         Text(
@@ -71,4 +62,3 @@ private fun CounterPreview() {
         onCountClick = {}
     )
 }
-

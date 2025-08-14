@@ -66,10 +66,10 @@ dependencies {
     implementation(libs.kotlin.serialization)
 
     //Navigation
-    implementation(libs.voyager.navigator)
-    implementation(libs.voyager.bottomSheetNavigator)
-    implementation(libs.voyager.screenModel)
-    implementation(libs.voyager.transitions)
+    implementation(libs.navigation.compose)
+
+    // ViewModel для Compose
+    implementation(libs.viewModel.compose)
 
     // Koin
     implementation(libs.koin.android)
