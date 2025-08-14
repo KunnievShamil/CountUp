@@ -5,5 +5,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface CounterRecordsRepository {
     suspend fun createCounterRecord(counterRecord: CounterRecordEntity)
-    fun getCounterRecords(counterId: Int): Flow<CounterRecordEntity>
+    fun getCounterRecords(counterId: Int): Flow<List<CounterRecordEntity>>
 }

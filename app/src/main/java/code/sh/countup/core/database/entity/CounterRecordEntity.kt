@@ -9,6 +9,6 @@ import java.time.LocalDateTime
 data class CounterRecordEntity(
     @PrimaryKey val uid: Int,
     @ColumnInfo(name = "counter_id") val counterId: Int,
-    @ColumnInfo(name = "age") val age: String,
+    @ColumnInfo(name = "age") val age: Int,
     @ColumnInfo(name = "date") val dateTime: LocalDateTime
 )

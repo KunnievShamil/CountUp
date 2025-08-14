@@ -13,5 +13,5 @@ interface CounterRecordDao {
     suspend fun insert(counterRecordEntity: CounterRecordEntity)
 
     @Query("SELECT * FROM CounterRecordEntity WHERE counter_id = :id")
-    fun getCounterRecords(id: Int): Flow<CounterRecordEntity>
+    fun getCounterRecords(id: Int): Flow<List<CounterRecordEntity>>
 }

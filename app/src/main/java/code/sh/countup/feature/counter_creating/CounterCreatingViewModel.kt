@@ -4,6 +4,7 @@ import androidx.lifecycle.viewModelScope
 import code.sh.countup.core.database.entity.CounterEntity
 import code.sh.countup.core.ui.base.BaseViewModel
 import code.sh.countup.domain.repository.CounterRepository
+import code.sh.countup.feature.counter.CounterScreen
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -24,7 +25,13 @@ class CounterCreatingViewModel(
                     uid = id,
                     name = state.value.name
                 )
-            )
+            ).also {
+                mutableEvent.send(
+                    CounterCreatingUiEvent.NavigateTo(
+                        screen = CounterScreen(counterId = id)
+                    )
+                )
+            }
         }
     }
 

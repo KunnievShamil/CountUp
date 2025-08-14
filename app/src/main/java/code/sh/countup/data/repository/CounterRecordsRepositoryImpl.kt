@@ -12,7 +12,7 @@ class CounterRecordsRepositoryImpl(
         counterRecordDao.insert(counterRecordEntity = counterRecord)
     }
 
-    override  fun getCounterRecords(counterId: Int): Flow<CounterRecordEntity> {
+    override fun getCounterRecords(counterId: Int): Flow<List<CounterRecordEntity>> {
         return counterRecordDao.getCounterRecords(id = counterId)
     }
 }
