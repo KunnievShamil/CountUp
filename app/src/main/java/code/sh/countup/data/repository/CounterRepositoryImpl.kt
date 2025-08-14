@@ -8,6 +8,11 @@ import kotlinx.coroutines.flow.Flow
 class CounterRepositoryImpl(
     private val counterDao: CounterDao
 ) : CounterRepository {
+
+    override suspend fun createCounter(counter: CounterEntity) {
+        counterDao.insert(counterEntity = counter)
+    }
+
     override fun getCounters(): Flow<CounterEntity> {
         return counterDao.getAllCounters()
     }

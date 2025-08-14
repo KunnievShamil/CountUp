@@ -14,7 +14,7 @@ import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.navigator.Navigator
 import cafe.adriel.voyager.navigator.bottomSheet.BottomSheetNavigator
 import code.sh.countup.core.ui.theme.CountUpTheme
-import code.sh.countup.feature.root.RootScreen
+import code.sh.countup.feature.counter_creating.CounterCreatingScreen
 
 private const val NAVIGATOR_KEY = "AppContentNavigator"
 
@@ -38,7 +38,7 @@ private fun AppContent() {
                     .windowInsetsPadding(WindowInsets.systemBars)
             ) {
                 Navigator(
-                    screen = RootScreen(),
+                    screen = CounterCreatingScreen(),
                     key = NAVIGATOR_KEY
                 )
             }
